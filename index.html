@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ben's Engine Command Centre V1</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>Ben's Engine Command Centre V1</h1>
+  <p>Engine + trades + screenshots + upgrades + 34-week mission.</p>
+</header>
+
+<main>
+<section class="grid">
+  <div class="card">
+    <h2>Engine Status</h2>
+    <input id="engineVersion" placeholder="Engine version e.g. V18">
+    <input id="connectionStatus" placeholder="Connection e.g. TV → PineConnector → MT5">
+    <input id="lastSignal" placeholder="Last signal">
+    <textarea id="engineNotes" placeholder="Engine notes"></textarea>
+  </div>
+
+  <div class="card">
+    <h2>34-Week Mission</h2>
+    <input id="debtRemaining" type="number" placeholder="Debt remaining £">
+    <input id="carFund" type="number" placeholder="Car fund £">
+    <input id="houseFund" type="number" placeholder="House fund £">
+    <input id="tradingAccount" type="number" placeholder="Trading account £">
+  </div>
+
+  <div class="card">
+    <h2>Weekly Snapshot</h2>
+    <input id="weeklyProfit" type="number" placeholder="Weekly profit £">
+    <input id="winRate" type="number" placeholder="Win rate %">
+    <input id="longPL" type="number" placeholder="Long P/L">
+    <input id="shortPL" type="number" placeholder="Short P/L">
+  </div>
+</section>
+
+<section class="card">
+  <h2>Trade Journal</h2>
+  <div class="row">
+    <input id="tradeTime" placeholder="Time/session">
+    <select id="tradeSide"><option>LONG</option><option>SHORT</option></select>
+    <input id="tradeResult" type="number" placeholder="P/L">
+    <input id="tradeReason" placeholder="Reason">
+    <button onclick="addTrade()">Add</button>
+  </div>
+  <table><thead><tr><th>Time</th><th>Side</th><th>P/L</th><th>Reason</th></tr></thead><tbody id="tradeTable"></tbody></table>
+</section>
+
+<section class="card">
+  <h2>Missed Move Log</h2>
+  <div class="row">
+    <input id="missedTitle" placeholder="Missed move title">
+    <input id="missedReason" placeholder="Why it mattered">
+    <button onclick="addMissed()">Add</button>
+  </div>
+  <ul id="missedList"></ul>
+</section>
+
+<section class="card">
+  <h2>Upgrade Board</h2>
+  <div class="row">
+    <input id="upgradeItem" placeholder="Upgrade idea">
+    <select id="upgradePriority"><option>High</option><option>Medium</option><option>Low</option></select>
+    <button onclick="addUpgrade()">Add</button>
+  </div>
+  <ul id="upgradeList"></ul>
+</section>
+
+<section class="card">
+  <h2>Weekly AI Review Notes</h2>
+  <textarea id="weeklyReview" placeholder="Paste weekly review here"></textarea>
+</section>
+
+<div class="actions">
+  <button onclick="saveAll()">Save Dashboard</button>
+  <button class="danger" onclick="resetAll()">Reset</button>
+</div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
