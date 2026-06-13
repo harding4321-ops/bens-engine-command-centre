@@ -1,3 +1,11 @@
-# V2.1 Fixed Mission Target Calculator
+# Ben's Engine Command Centre V2.2 Working
 
-Replace index.html, styles.css and app.js in GitHub.
+This version fixes Mission Target by using a normal text date field.
+
+Use date format:
+13/06/2026
+
+Replace these files in GitHub:
+- index.html
+- styles.css
+- app.js

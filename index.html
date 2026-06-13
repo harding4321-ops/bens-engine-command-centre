@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ben's Engine Command Centre V2.1</title>
-<link rel="stylesheet" href="styles.css">
+<title>Ben's Engine Command Centre V2.2</title>
+<link rel="stylesheet" href="styles.css?v=22">
 </head>
 <body>
 <header>
-  <h1>Ben's Engine Command Centre V2.1</h1>
+  <h1>Ben's Engine Command Centre V2.2</h1>
   <p>Mission tracker + engine + trades + missed moves + upgrades.</p>
 </header>
 
@@ -26,7 +26,7 @@
     <h2>Mission Target</h2>
     <input id="missionName" placeholder="Mission name e.g. 34 week reset">
     <input id="missionWeeks" type="number" placeholder="Weeks e.g. 34">
-    <input id="startDate" type="date">
+    <input id="startDate" placeholder="Start date e.g. 13/06/2026">
     <select id="targetType">
       <option value="Debt Free">Debt Free</option>
       <option value="Car Fund">Car Fund</option>
@@ -119,6 +119,7 @@
   <button id="resetBtn" type="button" class="danger">Reset</button>
 </div>
 </main>
-<script src="app.js"></script>
+
+<script src="app.js?v=22"></script>
 </body>
 </html>
