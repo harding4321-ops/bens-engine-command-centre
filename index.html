@@ -2,185 +2,48 @@
 <html>
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ben's Engine Command Centre V3.1</title>
+<title>Ben's Engine Command Centre V4</title>
 <style>
-:root{
-  --bg:#05070b;--bg2:#0b111b;--panel:#101827;--panel2:#151f31;--line:#293348;
-  --text:#edf2f7;--muted:#9aa4b2;--green:#22c55e;--yellow:#f59e0b;--red:#ef4444;--blue:#38bdf8;
-}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(circle at top left,#132033,#05070b 45%);color:var(--text);font-family:Arial,sans-serif}
-.app{display:flex;min-height:100vh}
-.sidebar{width:260px;background:rgba(3,7,13,.95);border-right:1px solid var(--line);padding:22px;position:sticky;top:0;height:100vh}
-.brand{font-size:21px;font-weight:900;line-height:1.15;margin-bottom:8px}
-.subbrand{color:var(--muted);font-size:13px;margin-bottom:26px}
-.nav button{display:block;width:100%;text-align:left;background:transparent;color:var(--text);border:1px solid transparent;border-radius:14px;padding:12px;margin:7px 0;font-weight:800;cursor:pointer}
-.nav button.active,.nav button:hover{background:var(--panel2);border-color:var(--line)}
-.main{flex:1;padding:26px;max-width:1500px;margin:0 auto}
-.topbar{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:20px}
-h1,h2,h3{margin-top:0}
-.pill{background:rgba(34,197,94,.13);color:var(--green);border:1px solid rgba(34,197,94,.35);padding:9px 14px;border-radius:999px;font-weight:900}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.card{background:linear-gradient(180deg,rgba(16,24,39,.96),rgba(10,16,27,.96));border:1px solid var(--line);border-radius:20px;padding:18px;margin-bottom:16px;box-shadow:0 18px 45px rgba(0,0,0,.28)}
-.metricTitle{color:var(--muted);font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
-.metric{font-size:30px;font-weight:950;margin-top:8px}
-.muted{color:var(--muted)}.green{color:var(--green)}.yellow{color:var(--yellow)}.red{color:var(--red)}.blue{color:var(--blue)}
-input,select,textarea{width:100%;padding:12px;margin:6px 0;border-radius:14px;border:1px solid var(--line);background:#08111f;color:var(--text)}
-textarea{min-height:86px}
-button.primary{background:var(--green);color:#031108;border:0;padding:12px 15px;border-radius:14px;font-weight:950;cursor:pointer}
-button.secondary{background:#1c2637;color:var(--text);border:1px solid var(--line);padding:10px 12px;border-radius:13px;cursor:pointer}
-button.danger{background:var(--red);color:white;border:0;padding:10px 12px;border-radius:13px;cursor:pointer}
-.formGrid{display:grid;grid-template-columns:1.1fr .8fr .8fr .8fr 1.6fr auto;gap:10px;align-items:end}
-.goalCard{border:1px solid var(--line);border-radius:18px;background:#0a1220;padding:15px;margin:12px 0}
-.goalTop{display:grid;grid-template-columns:1.2fr .7fr .7fr .7fr .75fr auto;gap:10px;align-items:center}
-.status{padding:7px 10px;border-radius:999px;font-size:12px;font-weight:950;display:inline-block;text-align:center}
-.status.active{background:rgba(245,158,11,.15);color:var(--yellow);border:1px solid rgba(245,158,11,.35)}
-.status.done{background:rgba(34,197,94,.15);color:var(--green);border:1px solid rgba(34,197,94,.35)}
-.status.behind{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.35)}
-.progress{height:12px;background:#060b13;border-radius:999px;overflow:hidden;border:1px solid var(--line);margin-top:10px}
-.progress div{height:100%;background:var(--green);width:0%}
-.why{color:var(--muted);font-size:13px;margin-top:9px}
-.tab{display:none}.tab.active{display:block}
-table{width:100%;border-collapse:collapse}
-th,td{border-bottom:1px solid var(--line);padding:10px;text-align:left}
-.milestone{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:12px 0}
-.footer-note{margin-top:20px;color:var(--muted);font-size:13px}
-@media(max-width:1100px){.app{display:block}.sidebar{width:100%;height:auto;position:relative}.grid4,.grid3,.grid2,.formGrid,.goalTop{grid-template-columns:1fr}.main{padding:16px}}
+:root{--bg:#05070b;--panel:#101827;--line:#293348;--text:#edf2f7;--muted:#9aa4b2;--green:#22c55e;--yellow:#f59e0b;--red:#ef4444;--blue:#38bdf8}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top left,#132033,#05070b 45%);color:var(--text);font-family:Arial,sans-serif}.hidden{display:none!important}
+.loginWrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}.loginCard{width:100%;max-width:430px;background:#101827;border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:0 24px 70px rgba(0,0,0,.45)}.logo{font-size:28px;font-weight:950;line-height:1.1}.sub{color:var(--muted);margin:8px 0 22px}.loginCard input{width:100%;padding:13px;margin:7px 0;border-radius:14px;border:1px solid var(--line);background:#08111f;color:var(--text)}.btn{width:100%;background:var(--green);color:#031108;border:0;padding:13px 15px;border-radius:14px;font-weight:950;cursor:pointer;margin-top:10px}.btn.secondary{background:#1c2637;color:var(--text);border:1px solid var(--line)}.warning{font-size:13px;color:var(--yellow);margin-top:16px;line-height:1.5}.error{color:var(--red);font-weight:800;margin-top:10px}.success{color:var(--green);font-weight:800;margin-top:10px}
+.app{display:flex;min-height:100vh}.sidebar{width:260px;background:rgba(3,7,13,.95);border-right:1px solid var(--line);padding:22px;position:sticky;top:0;height:100vh}.brand{font-size:21px;font-weight:900;line-height:1.15;margin-bottom:8px}.subbrand{color:var(--muted);font-size:13px;margin-bottom:20px}.userBox{font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:14px;padding:10px;margin-bottom:16px;word-break:break-word}.nav button{display:block;width:100%;text-align:left;background:transparent;color:var(--text);border:1px solid transparent;border-radius:14px;padding:12px;margin:7px 0;font-weight:800;cursor:pointer}.nav button.active,.nav button:hover{background:#151f31;border-color:var(--line)}
+.main{flex:1;padding:26px;max-width:1500px;margin:0 auto}.topbar{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:20px}h1,h2,h3{margin-top:0}.pill{background:rgba(34,197,94,.13);color:var(--green);border:1px solid rgba(34,197,94,.35);padding:9px 14px;border-radius:999px;font-weight:900}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.card{background:#101827;border:1px solid var(--line);border-radius:20px;padding:18px;margin-bottom:16px;box-shadow:0 18px 45px rgba(0,0,0,.28)}.metricTitle{color:var(--muted);font-size:13px;font-weight:800;text-transform:uppercase}.metric{font-size:30px;font-weight:950;margin-top:8px}.muted{color:var(--muted)}.green{color:var(--green)}.yellow{color:var(--yellow)}.red{color:var(--red)}.blue{color:var(--blue)}
+input,select,textarea{width:100%;padding:12px;margin:6px 0;border-radius:14px;border:1px solid var(--line);background:#08111f;color:var(--text)}textarea{min-height:86px}button.primary{background:var(--green);color:#031108;border:0;padding:12px 15px;border-radius:14px;font-weight:950;cursor:pointer}button.small{background:#1c2637;color:var(--text);border:1px solid var(--line);padding:10px 12px;border-radius:13px;cursor:pointer}button.danger{background:var(--red);color:white;border:0;padding:10px 12px;border-radius:13px;cursor:pointer}
+.formGrid{display:grid;grid-template-columns:1.1fr .8fr .8fr .8fr 1.6fr auto;gap:10px;align-items:end}.goalCard{border:1px solid var(--line);border-radius:18px;background:#0a1220;padding:15px;margin:12px 0}.goalTop{display:grid;grid-template-columns:1.2fr .7fr .7fr .7fr .75fr auto;gap:10px;align-items:center}.status{padding:7px 10px;border-radius:999px;font-size:12px;font-weight:950;display:inline-block;text-align:center}.status.active{background:rgba(245,158,11,.15);color:var(--yellow)}.status.done{background:rgba(34,197,94,.15);color:var(--green)}.progress{height:12px;background:#060b13;border-radius:999px;overflow:hidden;border:1px solid var(--line);margin-top:10px}.progress div{height:100%;background:var(--green);width:0%}.why{color:var(--muted);font-size:13px;margin-top:9px}.tab{display:none}.tab.active{display:block}table{width:100%;border-collapse:collapse}th,td{border-bottom:1px solid var(--line);padding:10px;text-align:left}.milestone{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:12px 0}.footer-note{margin-top:20px;color:var(--muted);font-size:13px}
+@media(max-width:1100px){.app{display:block}.sidebar{width:100%;height:auto;position:relative}.grid4,.grid3,.grid2,.formGrid,.goalTop{grid-template-columns:1fr}.main{padding:16px}.metric{font-size:24px}}
 </style>
 </head>
 <body>
-<div class="app">
-<aside class="sidebar">
-  <div class="brand">Ben's Engine<br>Command Centre</div>
-  <div class="subbrand">Mission Control For Your Life</div>
-  <div class="nav">
-    <button class="active" data-tab="dashboard">🏠 Dashboard</button>
-    <button data-tab="goals">🎯 Goal Manager</button>
-    <button data-tab="missions">🚀 Missions</button>
-    <button data-tab="trading">📈 Trading</button>
-    <button data-tab="journal">📔 Journal</button>
-    <button data-tab="finance">💰 Finance</button>
-    <button data-tab="engine">🔒 Engine Vault</button>
-    <button data-tab="ai">🤖 AI Review</button>
-    <button data-tab="settings">⚙️ Settings</button>
-  </div>
-</aside>
-
-<main class="main">
-<div class="topbar">
-  <div>
-    <h1 id="pageTitle">Dashboard</h1>
-    <div class="muted">Dashboard shows information. Tabs contain information.</div>
-  </div>
-  <div class="pill">V3.1 Mission Platform</div>
-</div>
-
-<section id="dashboard" class="tab active">
-  <div class="grid4">
-    <div class="card"><div class="metricTitle">Total mission target</div><div class="metric" id="dashTarget">£0.00</div></div>
-    <div class="card"><div class="metricTitle">Current progress</div><div class="metric green" id="dashCurrent">£0.00</div></div>
-    <div class="card"><div class="metricTitle">Total remaining</div><div class="metric red" id="dashRemaining">£0.00</div></div>
-    <div class="card"><div class="metricTitle">Weekly required</div><div class="metric yellow" id="dashWeekly">£0.00</div></div>
-  </div>
-  <div class="grid3">
-    <div class="card"><h2>Current Mission</h2><div class="metric blue" id="dashMission">34 Week Financial Reset</div><p class="muted">Week countdown lives in Missions.</p></div>
-    <div class="card"><h2>Next Milestone</h2><div class="metric" id="nextMilestone">🎂 Birthday</div><p class="muted" id="nextMilestoneSub">Your first checkpoint.</p></div>
-    <div class="card"><h2>Status</h2><div class="metric green" id="dashStatus">BUILD PHASE</div><p class="muted">Live trading not connected yet.</p></div>
-  </div>
-  <div class="card">
-    <h2>Active Goal Summary</h2>
-    <div id="dashboardGoals"></div>
-  </div>
-</section>
-
-<section id="goals" class="tab">
-  <div class="card">
-    <h2>Create / Edit Goals</h2>
-    <div class="formGrid">
-      <input id="goalName" placeholder="Goal name e.g. Debt Free, 7-Seater, Security Fund">
-      <select id="goalCategory"><option>Financial</option><option>Trading</option><option>Family</option><option>Business</option><option>Personal</option></select>
-      <input id="goalTarget" type="number" placeholder="Target £">
-      <input id="goalCurrent" type="number" placeholder="Current £">
-      <input id="goalWhy" placeholder="Why this matters">
-      <button class="primary" id="addGoalBtn">Add Goal</button>
-    </div>
-  </div>
-  <div class="grid2">
-    <div class="card"><h2>Active Goals</h2><div id="activeGoals"></div></div>
-    <div class="card"><h2>Completed Goals</h2><div id="completedGoals"></div></div>
-  </div>
-</section>
-
-<section id="missions" class="tab">
-  <div class="grid2">
-    <div class="card">
-      <h2>Mission Setup</h2>
-      <input id="missionName" placeholder="Mission name">
-      <input id="missionWeeks" type="number" placeholder="Weeks e.g. 34">
-      <input id="missionStart" placeholder="Start date e.g. 13/06/2026">
-      <button class="primary" id="saveMissionBtn">Save Mission</button>
-    </div>
-    <div class="card">
-      <h2>Mission Countdown</h2>
-      <p><b>Weeks left:</b> <span id="weeksLeft">-</span></p>
-      <p><b>Days left:</b> <span id="daysLeft">-</span></p>
-      <p><b>Total target:</b> <span id="missionTotal">-</span></p>
-      <p><b>Total remaining:</b> <span id="missionRemaining">-</span></p>
-    </div>
-  </div>
-  <div class="card">
-    <h2>Milestones</h2>
-    <div class="milestone"><div>🎂 Birthday Milestone</div><strong>12 Oct 2026</strong></div>
-    <div class="milestone"><div>🎄 Christmas Milestone</div><strong>25 Dec 2026</strong></div>
-    <div class="milestone"><div>🏁 Mission End</div><strong>Auto from mission weeks</strong></div>
-  </div>
-</section>
-
+<section id="loginScreen" class="loginWrap">
+<div class="loginCard">
+<div class="logo">Ben's Engine<br>Command Centre</div><div class="sub">V4 secure login foundation</div>
+<input id="email" type="email" placeholder="Email"><input id="password" type="password" placeholder="Password">
+<button id="loginBtn" class="btn">Login</button><button id="signupBtn" class="btn secondary">Create Account</button><button id="resetPasswordBtn" class="btn secondary">Send Password Reset</button>
+<div id="authMessage"></div><div class="warning">Do not add engine code, API keys, broker logins or sensitive documents yet. V4.1 adds database security.</div>
+</div></section>
+<div id="appScreen" class="app hidden">
+<aside class="sidebar"><div class="brand">Ben's Engine<br>Command Centre</div><div class="subbrand">Mission Control For Your Life</div><div class="userBox">Logged in as:<br><span id="userEmail">-</span></div><button id="logoutBtn" class="danger" style="width:100%;margin-bottom:16px">Logout</button><div class="nav"><button class="active" data-tab="dashboard">🏠 Dashboard</button><button data-tab="goals">🎯 Goal Manager</button><button data-tab="missions">🚀 Missions</button><button data-tab="trading">📈 Trading</button><button data-tab="journal">📔 Journal</button><button data-tab="finance">💰 Finance</button><button data-tab="engine">🔒 Engine Vault</button><button data-tab="ai">🤖 AI Review</button><button data-tab="settings">⚙️ Settings</button></div></aside>
+<main class="main"><div class="topbar"><div><h1 id="pageTitle">Dashboard</h1><div class="muted">Dashboard shows information. Tabs contain information.</div></div><div class="pill">V4 Login Foundation</div></div>
+<section id="dashboard" class="tab active"><div class="grid4"><div class="card"><div class="metricTitle">Total mission target</div><div class="metric" id="dashTarget">£0.00</div></div><div class="card"><div class="metricTitle">Current progress</div><div class="metric green" id="dashCurrent">£0.00</div></div><div class="card"><div class="metricTitle">Total remaining</div><div class="metric red" id="dashRemaining">£0.00</div></div><div class="card"><div class="metricTitle">Weekly required</div><div class="metric yellow" id="dashWeekly">£0.00</div></div></div><div class="grid3"><div class="card"><h2>Current Mission</h2><div class="metric blue" id="dashMission">34 Week Financial Reset</div></div><div class="card"><h2>Next Milestone</h2><div class="metric">🎂 Birthday</div></div><div class="card"><h2>Status</h2><div class="metric green">BUILD PHASE</div></div></div><div class="card"><h2>Active Goal Summary</h2><div id="dashboardGoals"></div></div></section>
+<section id="goals" class="tab"><div class="card"><h2>Create / Edit Goals</h2><div class="formGrid"><input id="goalName" placeholder="Goal name"><select id="goalCategory"><option>Financial</option><option>Trading</option><option>Family</option><option>Business</option><option>Personal</option></select><input id="goalTarget" type="number" placeholder="Target £"><input id="goalCurrent" type="number" placeholder="Current £"><input id="goalWhy" placeholder="Why this matters"><button class="primary" id="addGoalBtn">Add Goal</button></div></div><div class="grid2"><div class="card"><h2>Active Goals</h2><div id="activeGoals"></div></div><div class="card"><h2>Completed Goals</h2><div id="completedGoals"></div></div></div></section>
+<section id="missions" class="tab"><div class="grid2"><div class="card"><h2>Mission Setup</h2><input id="missionName" placeholder="Mission name"><input id="missionWeeks" type="number" placeholder="Weeks e.g. 34"><input id="missionStart" placeholder="Start date e.g. 13/06/2026"><button class="primary" id="saveMissionBtn">Save Mission</button></div><div class="card"><h2>Mission Countdown</h2><p><b>Weeks left:</b> <span id="weeksLeft">-</span></p><p><b>Days left:</b> <span id="daysLeft">-</span></p><p><b>Total target:</b> <span id="missionTotal">-</span></p><p><b>Total remaining:</b> <span id="missionRemaining">-</span></p></div></div><div class="card"><h2>Milestones</h2><div class="milestone"><div>🎂 Birthday Milestone</div><strong>12 Oct 2026</strong></div><div class="milestone"><div>🎄 Christmas Milestone</div><strong>25 Dec 2026</strong></div><div class="milestone"><div>🏁 Mission End</div><strong>Auto from mission weeks</strong></div></div></section>
 <section id="trading" class="tab"><div class="card"><h2>Trading Centre</h2><p class="muted">Future room for TradingView, MT5, PineConnector status and performance. Engine not integrated yet for safety.</p></div></section>
 <section id="journal" class="tab"><div class="card"><h2>Journal Vault</h2><textarea id="journalNotes" placeholder="Winners, losers, missed moves, lessons..."></textarea><button class="primary" id="saveJournalBtn">Save Journal</button></div></section>
 <section id="finance" class="tab"><div class="card"><h2>Finance Centre</h2><table><thead><tr><th>Goal</th><th>Why</th><th>Target</th><th>Current</th><th>Remaining</th><th>Status</th></tr></thead><tbody id="financeTable"></tbody></table></div></section>
-<section id="engine" class="tab"><div class="card"><h2>Engine Vault 🔒</h2><p class="red"><b>Protected area.</b></p><p class="muted">Future private version history, upgrade logs and test notes. No Pine code exposed here.</p></div></section>
-<section id="ai" class="tab"><div class="card"><h2>AI Review Centre</h2><textarea id="aiNotes" placeholder="Weekly review notes for AI analysis..."></textarea><button class="primary" id="saveAiBtn">Save AI Notes</button></div></section>
-<section id="settings" class="tab"><div class="card"><h2>Settings & Security</h2><p>Next serious phase: login-only app with private database before financial/engine integrations.</p><button class="danger" id="resetBtn">Reset Local Data</button></div></section>
-
-<div class="footer-note">V3.1 focuses on mission clarity: what the goal is, what you have, what is needed, and why.</div>
-</main>
-</div>
-
-<script>
-const $=id=>document.getElementById(id);
-const money=n=>"£"+Number(n||0).toLocaleString("en-GB",{minimumFractionDigits:2,maximumFractionDigits:2});
-let goals=JSON.parse(localStorage.getItem("v31_goals")||"[]");
-
-function seedGoals(){
-  if(goals.length) return;
-  goals=[
-    {name:"Debt Free",category:"Financial",target:20000,current:0,why:"Clear pressure and free up monthly cashflow.",status:"active"},
-    {name:"Family 7-Seater",category:"Family",target:15000,current:0,why:"Reliable family car ready for the new baby.",status:"active"},
-    {name:"Security Fund",category:"Financial",target:30000,current:0,why:"Bills covered so work becomes optional, not forced.",status:"active"},
-    {name:"Trading Capital",category:"Trading",target:12000,current:0,why:"Give the engine room to grow without pressure.",status:"active"}
-  ];
-  save();
-}
-
-function parseDate(s){if(!s)return null;s=s.trim();let p=s.split("/");if(p.length===3)return new Date(+p[2],+p[1]-1,+p[0]);p=s.split("-");if(p.length===3)return new Date(+p[0],+p[1]-1,+p[2]);return null}
-function timeLeft(){let weeks=+($("missionWeeks").value||34),start=parseDate($("missionStart").value||"13/06/2026");if(!start)return{weeksLeft:weeks,daysLeft:weeks*7};let end=new Date(start);end.setDate(end.getDate()+weeks*7);let today=new Date();today.setHours(0,0,0,0);let days=Math.max(0,Math.ceil((end-today)/86400000));return{daysLeft:days,weeksLeft:Math.max(0,Math.ceil(days/7))}}
-function save(){localStorage.setItem("v31_goals",JSON.stringify(goals));["missionName","missionWeeks","missionStart","journalNotes","aiNotes"].forEach(id=>localStorage.setItem(id,$(id)?.value||""))}
-function load(){ $("missionName").value=localStorage.getItem("missionName")||"34 Week Financial Reset"; $("missionWeeks").value=localStorage.getItem("missionWeeks")||"34"; $("missionStart").value=localStorage.getItem("missionStart")||"13/06/2026"; $("journalNotes").value=localStorage.getItem("journalNotes")||""; $("aiNotes").value=localStorage.getItem("aiNotes")||""; }
-function totals(){let active=goals.filter(g=>g.status==="active"),done=goals.filter(g=>g.status==="complete"),target=active.reduce((s,g)=>s+Number(g.target||0),0),current=active.reduce((s,g)=>s+Number(g.current||0),0),remaining=Math.max(0,target-current),tl=timeLeft(),weekly=tl.weeksLeft?remaining/tl.weeksLeft:remaining;return{active,done,target,current,remaining,weekly,tl}}
-function goalStatus(g){return (Number(g.current)>=Number(g.target)&&Number(g.target)>0)||g.status==="complete" ? "GOAL REACHED":"ACTIVE";}
-function goalHtml(g,i,compact=false){let pct=g.target?Math.min(100,Math.max(0,g.current/g.target*100)):0,done=goalStatus(g)==="GOAL REACHED";return `<div class="goalCard"><div class="goalTop"><div><b>${g.name}</b><br><span class="muted">${g.category}</span></div><div>${money(g.target)}</div><div>${money(g.current)}</div><div>${money(Math.max(0,g.target-g.current))}</div><div><span class="status ${done?'done':'active'}">${done?'GOAL REACHED':'ACTIVE'}</span></div><div>${compact?'':`<button class="secondary" onclick="editGoal(${i})">Edit</button> <button class="secondary" onclick="completeGoal(${i})">Complete</button> <button class="danger" onclick="deleteGoal(${i})">Delete</button>`}</div></div><div class="progress"><div style="width:${pct}%"></div></div><div class="why">${g.why||""}</div></div>`}
+<section id="engine" class="tab"><div class="card"><h2>Engine Vault 🔒</h2><p class="red"><b>Protected placeholder only.</b></p><p class="muted">Do not upload Pine code yet.</p></div></section>
+<section id="ai" class="tab"><div class="card"><h2>AI Review Centre</h2><textarea id="aiNotes" placeholder="Weekly review notes..."></textarea><button class="primary" id="saveAiBtn">Save AI Notes</button></div></section>
+<section id="settings" class="tab"><div class="card"><h2>Settings & Security</h2><p>V4 adds login. V4.1 should move goals/journal into Supabase database with Row Level Security.</p><button class="danger" id="resetBtn">Reset Local Data</button></div></section><div class="footer-note">V4 is login foundation. Data is still browser storage until V4.1 database upgrade.</div></main></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script>
+const $=id=>document.getElementById(id);let supabaseClient=null,currentUser=null;function authMsg(t,type="error"){let b=$("authMessage");b.className=type==="success"?"success":"error";b.textContent=t}function showLogin(){$("loginScreen").classList.remove("hidden");$("appScreen").classList.add("hidden")}function showApp(user){currentUser=user;$("userEmail").textContent=user.email||"-";$("loginScreen").classList.add("hidden");$("appScreen").classList.remove("hidden");load();seedGoals();render()}
+async function initAuth(){if(!window.SUPABASE_URL||!window.SUPABASE_ANON_KEY||window.SUPABASE_URL.includes("PASTE_")){authMsg("Supabase config missing. Open config.js and paste your Supabase URL and anon key.");return}supabaseClient=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_ANON_KEY);const {data}=await supabaseClient.auth.getSession();if(data.session?.user)showApp(data.session.user);else showLogin();supabaseClient.auth.onAuthStateChange((e,s)=>{if(s?.user)showApp(s.user);else showLogin()})}
+$("loginBtn").onclick=async()=>{if(!supabaseClient)return authMsg("Supabase not configured yet.");const {error}=await supabaseClient.auth.signInWithPassword({email:$("email").value,password:$("password").value});if(error)return authMsg(error.message);authMsg("Logged in.","success")};$("signupBtn").onclick=async()=>{if(!supabaseClient)return authMsg("Supabase not configured yet.");const {error}=await supabaseClient.auth.signUp({email:$("email").value,password:$("password").value});if(error)return authMsg(error.message);authMsg("Account created. Check email confirmation if required.","success")};$("resetPasswordBtn").onclick=async()=>{if(!supabaseClient)return authMsg("Supabase not configured yet.");const {error}=await supabaseClient.auth.resetPasswordForEmail($("email").value);if(error)return authMsg(error.message);authMsg("Password reset email sent.","success")};$("logoutBtn").onclick=async()=>{if(supabaseClient)await supabaseClient.auth.signOut();showLogin()};
+const money=n=>"£"+Number(n||0).toLocaleString("en-GB",{minimumFractionDigits:2,maximumFractionDigits:2});let goals=[];function userKey(k){return currentUser?"user_"+currentUser.id+"_"+k:k}function seedGoals(){if(goals.length)return;goals=[{name:"Debt Free",category:"Financial",target:20000,current:0,why:"Clear pressure and free up monthly cashflow.",status:"active"},{name:"Family 7-Seater",category:"Family",target:15000,current:0,why:"Reliable family car ready for the new baby.",status:"active"},{name:"Security Fund",category:"Financial",target:30000,current:0,why:"Bills covered so work becomes optional, not forced.",status:"active"},{name:"Trading Capital",category:"Trading",target:12000,current:0,why:"Give the engine room to grow without pressure.",status:"active"}];save()}
+function parseDate(s){if(!s)return null;s=s.trim();let p=s.split("/");if(p.length===3)return new Date(+p[2],+p[1]-1,+p[0]);p=s.split("-");if(p.length===3)return new Date(+p[0],+p[1]-1,+p[2]);return null}function timeLeft(){let weeks=+($("missionWeeks").value||34),start=parseDate($("missionStart").value||"13/06/2026");if(!start)return{weeksLeft:weeks,daysLeft:weeks*7};let end=new Date(start);end.setDate(end.getDate()+weeks*7);let today=new Date();today.setHours(0,0,0,0);let days=Math.max(0,Math.ceil((end-today)/86400000));return{daysLeft:days,weeksLeft:Math.max(0,Math.ceil(days/7))}}
+function save(){if(!currentUser)return;localStorage.setItem(userKey("goals"),JSON.stringify(goals));["missionName","missionWeeks","missionStart","journalNotes","aiNotes"].forEach(id=>localStorage.setItem(userKey(id),$(id)?.value||""))}function load(){if(!currentUser)return;goals=JSON.parse(localStorage.getItem(userKey("goals"))||"[]");$("missionName").value=localStorage.getItem(userKey("missionName"))||"34 Week Financial Reset";$("missionWeeks").value=localStorage.getItem(userKey("missionWeeks"))||"34";$("missionStart").value=localStorage.getItem(userKey("missionStart"))||"13/06/2026";$("journalNotes").value=localStorage.getItem(userKey("journalNotes"))||"";$("aiNotes").value=localStorage.getItem(userKey("aiNotes"))||""}
+function totals(){let active=goals.filter(g=>g.status==="active"),done=goals.filter(g=>g.status==="complete"),target=active.reduce((s,g)=>s+Number(g.target||0),0),current=active.reduce((s,g)=>s+Number(g.current||0),0),remaining=Math.max(0,target-current),tl=timeLeft(),weekly=tl.weeksLeft?remaining/tl.weeksLeft:remaining;return{active,done,target,current,remaining,weekly,tl}}function goalStatus(g){return (Number(g.current)>=Number(g.target)&&Number(g.target)>0)||g.status==="complete"?"GOAL REACHED":"ACTIVE"}
+function goalHtml(g,i,compact=false){let pct=g.target?Math.min(100,Math.max(0,g.current/g.target*100)):0,done=goalStatus(g)==="GOAL REACHED";return `<div class="goalCard"><div class="goalTop"><div><b>${g.name}</b><br><span class="muted">${g.category}</span></div><div>${money(g.target)}</div><div>${money(g.current)}</div><div>${money(Math.max(0,g.target-g.current))}</div><div><span class="status ${done?'done':'active'}">${done?'GOAL REACHED':'ACTIVE'}</span></div><div>${compact?'':`<button class="small" onclick="editGoal(${i})">Edit</button> <button class="small" onclick="completeGoal(${i})">Complete</button> <button class="danger" onclick="deleteGoal(${i})">Delete</button>`}</div></div><div class="progress"><div style="width:${pct}%"></div></div><div class="why">${g.why||""}</div></div>`}
 function render(){let t=totals();$("dashMission").textContent=$("missionName").value||"Mission";$("dashTarget").textContent=money(t.target);$("dashCurrent").textContent=money(t.current);$("dashRemaining").textContent=money(t.remaining);$("dashWeekly").textContent=money(t.weekly);$("weeksLeft").textContent=t.tl.weeksLeft;$("daysLeft").textContent=t.tl.daysLeft;$("missionTotal").textContent=money(t.target);$("missionRemaining").textContent=money(t.remaining);$("dashboardGoals").innerHTML=t.active.length?t.active.map(g=>goalHtml(g,goals.indexOf(g),true)).join(""):"<p class='muted'>No active goals yet.</p>";$("activeGoals").innerHTML=t.active.length?t.active.map(g=>goalHtml(g,goals.indexOf(g))).join(""):"<p class='muted'>No active goals yet.</p>";$("completedGoals").innerHTML=t.done.length?t.done.map(g=>goalHtml(g,goals.indexOf(g))).join(""):"<p class='muted'>No completed goals yet.</p>";$("financeTable").innerHTML=goals.map(g=>`<tr><td>${g.name}</td><td>${g.why||""}</td><td>${money(g.target)}</td><td>${money(g.current)}</td><td>${money(Math.max(0,g.target-g.current))}</td><td>${goalStatus(g)}</td></tr>`).join("")}
-window.completeGoal=i=>{goals[i].status="complete";goals[i].current=goals[i].target;save();render()}
-window.deleteGoal=i=>{if(confirm("Delete this goal?")){goals.splice(i,1);save();render()}}
-window.editGoal=i=>{let g=goals[i];$("goalName").value=g.name;$("goalCategory").value=g.category;$("goalTarget").value=g.target;$("goalCurrent").value=g.current;$("goalWhy").value=g.why||"";goals.splice(i,1);save();render();window.scrollTo({top:0,behavior:"smooth"});}
-document.querySelectorAll(".nav button").forEach(btn=>{btn.onclick=()=>{document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));$(btn.dataset.tab).classList.add("active");$("pageTitle").textContent=btn.textContent.replace(/^[^A-Za-z]+/,"")}})
-$("addGoalBtn").onclick=()=>{if(!$("goalName").value)return alert("Add a goal name.");goals.push({name:$("goalName").value,category:$("goalCategory").value,target:+$("goalTarget").value||0,current:+$("goalCurrent").value||0,why:$("goalWhy").value,status:"active"});["goalName","goalTarget","goalCurrent","goalWhy"].forEach(id=>$(id).value="");save();render()}
-$("saveMissionBtn").onclick=()=>{save();render();alert("Mission saved.")};$("saveJournalBtn").onclick=()=>{save();alert("Journal saved.")};$("saveAiBtn").onclick=()=>{save();alert("AI notes saved.")};$("resetBtn").onclick=()=>{if(confirm("Reset all Command Centre local data?")){localStorage.clear();location.reload()}}
-["missionName","missionWeeks","missionStart"].forEach(id=>$(id).addEventListener("input",()=>{save();render()}))
-load(); seedGoals(); render();
-</script>
-</body>
-</html>
+window.completeGoal=i=>{goals[i].status="complete";goals[i].current=goals[i].target;save();render()};window.deleteGoal=i=>{if(confirm("Delete this goal?")){goals.splice(i,1);save();render()}};window.editGoal=i=>{let g=goals[i];$("goalName").value=g.name;$("goalCategory").value=g.category;$("goalTarget").value=g.target;$("goalCurrent").value=g.current;$("goalWhy").value=g.why||"";goals.splice(i,1);save();render()}
+document.querySelectorAll(".nav button").forEach(btn=>{btn.onclick=()=>{document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));$(btn.dataset.tab).classList.add("active");$("pageTitle").textContent=btn.textContent.replace(/^[^A-Za-z]+/,"")}});$("addGoalBtn").onclick=()=>{if(!$("goalName").value)return alert("Add a goal name.");goals.push({name:$("goalName").value,category:$("goalCategory").value,target:+$("goalTarget").value||0,current:+$("goalCurrent").value||0,why:$("goalWhy").value,status:"active"});["goalName","goalTarget","goalCurrent","goalWhy"].forEach(id=>$(id).value="");save();render()};$("saveMissionBtn").onclick=()=>{save();render();alert("Mission saved.")};$("saveJournalBtn").onclick=()=>{save();alert("Journal saved.")};$("saveAiBtn").onclick=()=>{save();alert("AI notes saved.")};$("resetBtn").onclick=()=>{if(confirm("Reset local data for this user?")){localStorage.removeItem(userKey("goals"));["missionName","missionWeeks","missionStart","journalNotes","aiNotes"].forEach(id=>localStorage.removeItem(userKey(id)));load();seedGoals();render()}};["missionName","missionWeeks","missionStart"].forEach(id=>$(id).addEventListener("input",()=>{save();render()}));initAuth();
+</script></body></html>
