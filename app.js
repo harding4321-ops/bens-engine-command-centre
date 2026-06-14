@@ -1,1 +1,1 @@
-// V2.5 uses inline JavaScript in index.html
+// V3.1 uses inline JavaScript in index.html
