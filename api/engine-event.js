@@ -35,7 +35,7 @@ module.exports = async function handler(req, res) {
       why: payload.why || payload.raw_message || null,
       entry_price: Number(payload.entry_price || payload.price || payload.entry || 0) || null,
       sl: Number(payload.sl || 0) || null,
-      tp: Number(payload.tp || 0) || null,
+      tp1: Number(payload.tp1 || payload.tp || 0) || null,
       raw_payload: payload
     };
 
