@@ -21,19 +21,29 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    const isTest = req.method === "GET";
-
-    const row = {
-      source: "TradingView",
-      symbol: isTest ? "TEST" : payload.symbol || payload.ticker || null,
-      action: isTest ? "TEST_INSERT" : payload.action || payload.event_type || null,
-      result: isTest ? "TEST" : payload.result || null,
-      why: isTest ? "Browser test from Vercel" : payload.why || payload.raw_message || null,
-      entry_price: isTest ? 1 : Number(payload.entry_price || payload.price || payload.entry || 0) || null,
-      sl: isTest ? 1 : Number(payload.sl || 0) || null,
-      tp1: isTest ? 1 : Number(payload.tp1 || payload.tp || 0) || null,
-      raw_payload: isTest ? { test: true } : payload
-    };
+   const row = {
+  source: payload.source || "TradingView",
+  symbol: payload.symbol || payload.ticker || null,
+  action: payload.action || payload.event_type || null,
+  bias: payload.bias || null,
+  session_name: payload.session || payload.session_name || null,
+  opportunity: Number(payload.opportunity || 0) || null,
+  entry_quality: Number(payload.entry_quality || payload.entry || 0) || null,
+  direction_conf: Number(payload.direction_conf || payload.dir || 0) || null,
+  fake_risk: Number(payload.fake_risk || payload.fake || 0) || null,
+  trend_age: payload.trend_age || null,
+  expansion: payload.expansion || null,
+  expansion_score: Number(payload.expansion_score || 0) || null,
+  pullback: payload.pullback || null,
+  pullback_score: Number(payload.pullback_score || 0) || null,
+  news_state: payload.news_state || payload.news || null,
+  why: payload.why || payload.raw_message || null,
+  entry_price: Number(payload.entry_price || payload.price || payload.entry_price_value || 0) || null,
+  sl: Number(payload.sl || 0) || null,
+  tp1: Number(payload.tp1 || payload.tp || 0) || null,
+  result: payload.result || null,
+  raw_payload: payload
+};
 
     const response = await fetch(`${supabaseUrl}/rest/v1/engine_events`, {
       method: "POST",
