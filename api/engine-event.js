@@ -1,7 +1,14 @@
 module.exports = async function handler(req, res) {
   try {
-    if (req.method !== "POST") {
-      return res.status(405).json({ error: "Method not allowed" });
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+    if (!supabaseUrl || !supabaseKey) {
+      return res.status(500).json({
+        error: "Missing environment variables",
+        hasUrl: !!supabaseUrl,
+        hasKey: !!supabaseKey
+      });
     }
 
     let payload = req.body || {};
@@ -14,36 +21,27 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    const supabaseUrl = process.env.SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    const isTest = req.method === "GET";
 
-    if (!supabaseUrl || !supabaseKey) {
-      return res.status(500).json({
-        error: "Missing environment variables",
-        hasUrl: !!supabaseUrl,
-        hasKey: !!supabaseKey
-      });
-    }
-
-   const row = {
-  source: "TradingView",
-  symbol: payload.symbol || payload.ticker || null,
-  action: payload.action || payload.event_type || null,
-  result: payload.result || null,
-  why: payload.why || payload.raw_message || null,
-  entry_price: Number(payload.entry_price || payload.price || payload.entry || 0) || null,
-  sl: Number(payload.sl || 0) || null,
-  tp1: Number(payload.tp || 0) || null,
-  raw_payload: payload
-};
+    const row = {
+      source: "TradingView",
+      symbol: isTest ? "TEST" : payload.symbol || payload.ticker || null,
+      action: isTest ? "TEST_INSERT" : payload.action || payload.event_type || null,
+      result: isTest ? "TEST" : payload.result || null,
+      why: isTest ? "Browser test from Vercel" : payload.why || payload.raw_message || null,
+      entry_price: isTest ? 1 : Number(payload.entry_price || payload.price || payload.entry || 0) || null,
+      sl: isTest ? 1 : Number(payload.sl || 0) || null,
+      tp1: isTest ? 1 : Number(payload.tp1 || payload.tp || 0) || null,
+      raw_payload: isTest ? { test: true } : payload
+    };
 
     const response = await fetch(`${supabaseUrl}/rest/v1/engine_events`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        apikey: supabaseKey,
-        Authorization: `Bearer ${supabaseKey}`,
-        Prefer: "return=representation"
+        "apikey": supabaseKey,
+        "Authorization": `Bearer ${supabaseKey}`,
+        "Prefer": "return=representation"
       },
       body: JSON.stringify(row)
     });
