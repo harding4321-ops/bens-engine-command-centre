@@ -42,7 +42,7 @@ module.exports = async function handler(req, res) {
 
     // Journal payload
     const journalResponse = await fetch(
-      `https://${process.env.VERCEL_URL}/api/engine-event`,
+      "https://bens-engine-command-centre.vercel.app/api/engine-event",
       {
         method: "POST",
         headers: {
